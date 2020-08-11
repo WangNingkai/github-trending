@@ -59,7 +59,7 @@ def get_trending(url: str, params: dict = None) -> dict:
     if html is not None:
         is_blank = has_trending(html)
         if not is_blank:
-            if url.endswith(DEVELOPER):
+            if url.find(DEVELOPER) >= 0:
                 return parse_developer(html)
             else:
                 return parse_repo(html)
