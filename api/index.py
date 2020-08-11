@@ -21,24 +21,19 @@ async def index(request):
 
 @app.route("/repo")
 async def repositoryHandler(request):
-    lang = request.args.get("lang", None)
-    since = request.args.get("since", None)
-    url = REPOSITORY
-    if lang is not None:
-        lang = lang.replace("-shuo", "%23")
-        url += lang
-    params = None
-    if since is not None:
-        params = {"since": since}
-    result = get_trending(url=url, params=params)
+    result = trending(REPOSITORY, request)
     return response.json(result)
 
 
 @app.route("/developer")
 async def developerHandler(request):
+    result = trending(DEVELOPER, request)
+    return response.json(result)
+
+
+def trending(url, request):
     lang = request.args.get("lang", None)
     since = request.args.get("since", None)
-    url = DEVELOPER
     if lang is not None:
         lang = lang.replace("-shuo", "%23")
         url += lang
@@ -46,7 +41,7 @@ async def developerHandler(request):
     if since is not None:
         params = {"since": since}
     result = get_trending(url=url, params=params)
-    return response.json(result)
+    return result
 
 
 if __name__ == "__main__":
