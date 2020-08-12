@@ -100,7 +100,7 @@ def parse_developer(html) -> dict:
     items = []
     articles = html.xpath('//article')
     for article in articles:
-        if(len(article.xpath('./div[2]/div[1]/div[1]/h1/a/@href')) == 0):
+        if len(article.xpath('./div[2]/div[1]/div[1]/h1/a/@href')) == 0:
             continue
         user = article.xpath('./div[2]/div[1]/div[1]/h1/a/@href')[0][1:]
         item = {'user': user}
@@ -129,8 +129,7 @@ def get_html(url: str, params: dict = None):
     try:
         if params is not None:
             url = "{0}?since={1}".format(url, params.get('since'))
-        response = requests.get(url, headers=HEADER, timeout=TIMEOUT).text
+        response = requests.get(url, headers=HEADER, timeout=TIMEOUT)
+        return etree.HTML(response.text)
     except Exception:
         return None
-    else:
-        return etree.HTML(response)

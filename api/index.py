@@ -7,7 +7,7 @@ parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, parentdir)
 
 try:
-    from spider import DEVELOPER, NO_RESULT, REPOSITORY, get_trending
+    from spider import DEVELOPER, REPOSITORY, get_trending
 except:
     raise
 
