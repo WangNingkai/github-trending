@@ -1,5 +1,3 @@
 lxml
 requests
 sanic
-asyncio
-aiohttp
